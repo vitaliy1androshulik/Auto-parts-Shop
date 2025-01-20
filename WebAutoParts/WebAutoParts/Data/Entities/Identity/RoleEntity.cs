@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace WebAutoParts.Data.Entities.Identity
+namespace WebAutoParts.Data.Entities.Identity;
+
+public class RoleEntity : IdentityRole<int>
 {
-    public class RoleEntity : IdentityRole<int>
-    {
-        public virtual ICollection<UserRoleEntity> UserRoles { get; set; } = null!;
-    }
+    public virtual ICollection<UserRoleEntity> UserRoles { get; set; } = null!;
 }
