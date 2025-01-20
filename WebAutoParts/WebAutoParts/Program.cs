@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using WebAutoParts.Data;
+
 namespace WebAutoParts
 {
     public class Program
@@ -8,6 +11,9 @@ namespace WebAutoParts
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddDbContext<AutoPartsDbContext>(opt =>
+                opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
