@@ -1,10 +1,10 @@
-// import {useEffect, useState} from "react";
-// import axios from "axios";
+
 import {APP_ENV} from "../../env";
-// import {ICategoryItem} from "../types.ts";
-import {useGetCategoriesQuery} from "../../services/apiCategory.ts";
+
+import {useDeleteCategoryMutation, useGetCategoriesQuery} from "../../services/apiCategory.ts";
 import {Link} from "react-router-dom";
-// import {useNavigate} from "react-router-dom";
+import {Button, notification} from "antd";
+
 
 const CategoryListPage = () => {
 
@@ -13,6 +13,22 @@ const CategoryListPage = () => {
     const { data: list, error, isLoading } = useGetCategoriesQuery();
 
     // const [createCategory] = useCreateCategoryMutation();
+    const [deleteCategory] = useDeleteCategoryMutation();
+
+    const handleDelete = async (id: number) => {
+        try {
+            await deleteCategory(id).unwrap();
+            notification.success({
+                message: 'Категорія видалена',
+                description: 'Категорія успішно видалена!',
+            });
+        } catch {
+            notification.error({
+                message: 'Помилка видалення категорії',
+                description: 'Щось пішло не так, спробуйте ще раз.',
+            });
+        }
+    };
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading categories!</div>;
@@ -20,6 +36,32 @@ const CategoryListPage = () => {
 
     console.log("APP_ENV", APP_ENV.REMOTE_BASE_URL);
     console.log("Render component");
+
+    const mapData = list?.map((category) => (
+        <tr key={category.id}
+            className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {category.name}
+            </th>
+            <td className="px-6 py-4">
+                {category.slug}
+            </td>
+            <td className="px-6 py-4">
+                {category.description}
+            </td>
+            <td className="px-6 py-4">
+                <Link to={`edit/${category.id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                <Button
+                    type="primary"
+                    danger
+                    onClick={() => handleDelete(category.id)}
+                >
+                    Delete
+                </Button>
+            </td>
+        </tr>
+    ));
+
 
     return (
         <>
@@ -54,28 +96,7 @@ const CategoryListPage = () => {
                     </thead>
                     <tbody>
 
-                    {list?.map((category) => (
-                        <tr key={category.id}
-                            className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {category.name}
-                            </th>
-                            <td className="px-6 py-4">
-                                {category.slug}
-                            </td>
-                            <td className="px-6 py-4">
-                                {category.description}
-                            </td>
-                            <td className="px-6 py-4">
-                                {category.created_at}
-                            </td>
-                            <td className="px-6 py-4">
-                                <a href="#"
-                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                    ))}
+                    {mapData}
                     </tbody>
                 </table>
             </div>
