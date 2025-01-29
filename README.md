@@ -5,13 +5,13 @@ docker -v
 ```
 docker build -t pd211-asp . 
 docker images --all
-docker run -it --rm -p 5091:8080 --name fonbook_container pd211-asp
-docker run -d --restart=always --name fonbook_container -p 5091:8080 pd211-asp
-docker run -d --restart=always -v d:/volumes/spring/uploading:/app/uploading --name fonbook_container -p 5091:8080 pd211-asp
-docker run -d --restart=always -v /volumes/spring/uploading:/app/uploading --name fonbook_container -p 5091:8080 pd211-asp
+docker run -it --rm -p 5091:8080 --name pd211_container pd211-asp
+docker run -d --restart=always --name pd211_container -p 5091:8080 pd211-asp
+docker run -d --restart=always -v d:/volumes/spring/uploading:/app/uploading --name pd211_container -p 5091:8080 pd211-asp
+docker run -d --restart=always -v /volumes/spring/uploading:/app/uploading --name pd211_container -p 5091:8080 pd211-asp
 docker ps -a
-docker stop fonbook_container
-docker rm fonbook_container
+docker stop pd211_container
+docker rm pd211_container
 
 docker images --all
 docker rmi pd211-asp
@@ -22,15 +22,15 @@ docker push novakvova/pd211-asp:latest
 
 docker pull novakvova/pd211-asp:latest
 docker ps -a
-docker run -d --restart=always --name fonbook_container -p 5091:8080 novakvova/pd211-asp
+docker run -d --restart=always --name pd211_container -p 5091:8080 novakvova/pd211-asp
 
 
 docker pull novakvova/pd211-asp:latest
 docker images --all
 docker ps -a
-docker stop fonbook_container
-docker rm fonbook_container
-docker run -d --restart=always --name fonbook_container -p 5091:8080 novakvova/pd211-asp
+docker stop pd211_container
+docker rm pd211_container
+docker run -d --restart=always --name pd211_container -p 5091:8080 novakvova/pd211-asp
 
 ---------------/etc/nginx/sites-available/--------------------------
 
