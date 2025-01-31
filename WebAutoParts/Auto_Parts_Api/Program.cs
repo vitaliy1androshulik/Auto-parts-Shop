@@ -16,6 +16,7 @@ builder.Services.AddDbContext(connectionString);
 builder.Services.AddMapper();
 
 builder.Services.AddServices();
+builder.Services.AddFluentValidators();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
