@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.MapperProfile;
 using Core.Services;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core
@@ -19,6 +21,14 @@ namespace Core
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IPartsService,SparePartService>();
+        }
+        public static void AddFluentValidators(this IServiceCollection services)
+        {
+            services.AddFluentValidationAutoValidation();
+            // enable client-side validation
+            services.AddFluentValidationClientsideAdapters();
+            // Load an assembly reference rather than using a marker type.
+            services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         }
 
     }

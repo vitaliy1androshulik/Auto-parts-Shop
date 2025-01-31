@@ -1,6 +1,0 @@
-@WebAutoParts_HostAddress = http://localhost:5243
-
-GET {{WebAutoParts_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
