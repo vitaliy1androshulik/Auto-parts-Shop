@@ -43,14 +43,12 @@ const CategoryListPage = () => {
             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {category.name}
             </th>
-            <td className="px-6 py-4">
-                {category.slug}
-            </td>
+           
             <td className="px-6 py-4">
                 {category.description}
             </td>
             <td className="px-6 py-4">
-                <Link to={`edit/${category.id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                
                 <Button
                     type="primary"
                     danger
@@ -67,10 +65,7 @@ const CategoryListPage = () => {
         <>
             <h1 className={"text-center text-4xl font-bold text-blue-500"}>Список категорій</h1>
 
-            <Link to={"create"}
-                    className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                Додати
-            </Link>
+
 
 
             <div className="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -80,15 +75,11 @@ const CategoryListPage = () => {
                         <th scope="col" className="px-6 py-3">
                             Назва
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            Slug
-                        </th>
+
                         <th scope="col" className="px-6 py-3">
                             Опис
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            Дата створення
-                        </th>
+
                         <th scope="col" className="px-6 py-3">
                             &nbsp;
                         </th>
