@@ -4,17 +4,17 @@ import {APP_ENV} from "../env";
 import {ICategoryItem, ICategoryPostRequest, ICategoryPutRequest} from "../pages/Category/types.ts";
 
 export const apiCategory = createApi({
-    reducerPath: 'Category', // Унікальний шлях для цього API у Redux Store
+    reducerPath: 'Parts', // Унікальний шлях для цього API у Redux Store
     baseQuery: fetchBaseQuery({ baseUrl: `${APP_ENV.REMOTE_BASE_URL}/api` }), // Базовий URL
-    tagTypes: ["Category"], // Додаємо tag для категорій
+    tagTypes: ["Part"], // Додаємо tag для категорій
     endpoints: (builder) => ({
         getCategories: builder.query<ICategoryItem[], void>({ // Запит для отримання категорій
-            query: () => 'categories', // Шлях до endpoint
-            providesTags: ["Category"], // Позначаємо, що цей запит пов'язаний з "Category"
+            query: () => 'Parts/all', // Шлях до endpoint
+            providesTags: ["Part"], // Позначаємо, що цей запит пов'язаний з "Category"
         }),
         getCategory: builder.query<ICategoryItem, number>({
             query: (id) => `categories/${id}/`,
-            providesTags: (_, __, id) => [{ type: 'Category', id }],
+            providesTags: (_, __, id) => [{ type: 'Part', id }],
         }),
         createCategory: builder.mutation<ICategoryItem, ICategoryPostRequest>({
             query: (newCategory) => ({
