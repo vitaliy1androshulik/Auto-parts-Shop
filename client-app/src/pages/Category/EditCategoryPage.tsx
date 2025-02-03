@@ -1,7 +1,7 @@
 import { Form, Input, Button, notification } from 'antd';
 import TextArea from "antd/es/input/TextArea";
 import {useNavigate, useParams} from "react-router-dom";
-import {useGetCategoryQuery, useUpdateCategoryMutation} from "../../services/apiCategory.ts";
+import {useGetCategoryQuery, useUpdateCategoryMutation} from "../../services/apiParts.ts";
 import {ICategoryPutRequest} from "./types.ts";
 
 const { Item } = Form;

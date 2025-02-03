@@ -1,32 +1,32 @@
 import React from "react";
 import {Button, Form, Input} from "antd";
-import {ICategoryPostRequest} from "./types.ts";
+import {ISparePart} from "./types.ts";
 import TextArea from "antd/es/input/TextArea";
 import {useNavigate} from "react-router-dom";
-import {useCreateCategoryMutation} from "../../services/apiCategory.ts";
+import {useCreateSparePartMutation} from "../../services/apiParts.ts";
 
 const {Item} = Form;
 
 const CategoryCreatePage: React.FC = () => {
 
-    const [form] = Form.useForm<ICategoryPostRequest>();
+    const [form] = Form.useForm<ISparePart>();
     const navigate = useNavigate();
-    const [createCategory] = useCreateCategoryMutation();
+    const [createSparePart] = useCreateSparePartMutation();
 
     //Знімає дані з форми
-    const onFinish = async (values: ICategoryPostRequest) => {
+    const onFinish = async (values: ISparePart) => {
         try {
-            const response = await createCategory(values).unwrap();
+            const response = await createSparePart(values).unwrap();
             console.log("Категорія успішно створена:", response);
             navigate("..");
         } catch (error) {
-            console.error("Помилка під час створення категорії:", error);
+            console.error("Помилка під час додавання деталі:", error);
         }
     }
 
     return (
         <>
-            <h1 className={"text-center text-4xl font-bold text-blue-500"}>Додати категорію</h1>
+            <h1 className={"text-center text-4xl font-bold text-blue-500"}>Додати деталь</h1>
             <div style={{maxWidth: '400px', margin: '0 auto'}}>
                 <Form
                     form={form}
@@ -35,20 +35,20 @@ const CategoryCreatePage: React.FC = () => {
 
                     <Item
                         name={"name"}
-                        label={"Назва категорії"}
+                        label={"Назва деталі"}
                         rules={[
-                            {required: true, message: "Вкажіть назву категорії"}
+                            {required: true, message: "Вкажіть назву деталі"}
                         ]}>
                         <Input placeholder={"Назва"}/>
                     </Item>
 
                     <Item
-                        name={"slug"}
-                        label={"Slug"}
+                        name={"Quantity"}
+                        label={"Quantity"}
                         rules={[
-                            {required: true, message: "Вкажіть slug категорії"}
+                            {required: true, message: "Вкажіть кількість деталей"}
                         ]}>
-                        <Input placeholder={"Slug"}/>
+                        <Input placeholder={"Кількість"}/>
                     </Item>
 
                     <Item
@@ -59,7 +59,7 @@ const CategoryCreatePage: React.FC = () => {
 
                     <Item>
                         <Button type="primary" htmlType="submit">
-                            Створити категорію
+                            Створити деталь
                         </Button>
                     </Item>
 

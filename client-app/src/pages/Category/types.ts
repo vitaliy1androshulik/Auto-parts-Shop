@@ -1,19 +1,39 @@
-export interface ICategoryItem {
-    id: number;                  // Унікальний ідентифікатор категорії (можна додати якщо є поле 'id')
-    name: string;                // Назва категорії
-    slug: string;                // URL-ідентифікатор
-    description?: string;        // Опис (може бути відсутній)
-    created_at: string;          // Дата створення (тип для DateTime)
-    updated_at: string;          // Дата оновлення (тип для DateTime)
-}
-
-// CategoryModel.ts
-export interface ICategoryPostRequest {
-    name: string;         // Назва категорії (обов'язкове поле)
-    slug: string;         // Унікальний ідентифікатор (обов'язкове поле)
-    description?: string; // Опис (необов'язкове поле)
-}
-
-export interface ICategoryPutRequest extends Partial<ICategoryPostRequest> {
+// Таблиця SpareParts
+export interface ISparePart {
     id: number;
+    name: string;
+    imageUrl: string;
+    categoryId: number;
+    producerId: number;
+    providerId: number;
+    partNumber: string;
+    description: string;
+    quantity: number;
+    price: number;
+}
+
+// Таблиця Producers
+export interface IProducer {
+    id: number;
+    name: string;
+    country: string;
+}
+
+// Таблиця Providers
+export interface IProvider {
+    id: number;
+    name: string;
+}
+
+// Таблиця Categories
+export interface ICategory {
+    id: number;
+    name: string;
+}
+
+// Таблиця SubCategories
+export interface ISubCategory {
+    id: number;
+    title: string;
+    categoryId: number;
 }
